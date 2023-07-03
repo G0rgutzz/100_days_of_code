@@ -40,15 +40,25 @@ def power(n1, n2):
 operations = {
     "+": add, "-": subtraction, "*": multiply, "/": divide, "^": power
 }
-num1 = int(input("What's the first number? "))
-num2 = int(input("What's the second number? "))
-for item in operations:
-    print(item, operations[item])
-symbol = input("Pick an operation from the line above: ")
-answer = operations[symbol](num1, num2)
-print(f"{num1} {symbol} {num2} = {answer}")
-symbol = input("Pick another operation: ")
-num3 = int(input("What's another number? "))
-answer1 = operations[symbol](answer, num3)
-print(f"{answer} {symbol} {num3} = {answer1}")
-
+tmp1 = 'y'
+answer = 0
+num1 = 0
+while tmp1 == 'y':
+    if num1 == 0:
+        num1 = int(input("What's the first number? "))
+        num2 = int(input("What's the second number? "))
+    else:
+        num1 = answer
+        num2 = int(input("What's another number? "))
+    for item in operations:
+        print(item, operations[item])
+    symbol = input("Pick an operation from the line above: ")
+    answer = operations[symbol](num1, num2)
+    print(f"{num1} {symbol} {num2} = {answer}")
+    tmp1 = input("Do you want to continue. Type y for 'yes', n for 'no'.")
+'''
+    symbol = input("Pick another operation: ")
+    num3 = int(input("What's another number? "))
+    answer1 = operations[symbol](answer, num3)
+    print(f"{answer} {symbol} {num3} = {answer1}")
+    tmp1 = input("Do you want to continue. Type y for 'yes', n for 'no'.")'''
