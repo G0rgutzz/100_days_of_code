@@ -45,11 +45,11 @@ answer = 0
 num1 = 0
 while tmp1 == 'y':
     if num1 == 0:
-        num1 = int(input("What's the first number? "))
-        num2 = int(input("What's the second number? "))
+        num1 = float(input("What's the first number? "))
+        num2 = float(input("What's the second number? "))
     else:
         num1 = answer
-        num2 = int(input("What's another number? "))
+        num2 = float(input("What's another number? "))
     for item in operations:
         print(item, operations[item])
     symbol = input("Pick an operation from the line above: ")
