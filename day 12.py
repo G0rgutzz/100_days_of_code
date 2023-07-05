@@ -15,12 +15,12 @@ def difficulty():  # function that sets difficulty level
         return attempts
 
 
-def guess():
-    a = difficulty()
-    number = random.randint(1, 100)
-    for i in range(0, a):
-        user_number = int(input("Make a guess:"))
-        if user_number > number:
+def guess():  # game function
+    a = difficulty()  # gets number of attempts
+    number = random.randint(1, 100)  # random number
+    for i in range(0, a):  # loop that will repeat itself for x attempts
+        user_number = int(input("Make a guess:"))  # user number
+        if user_number > number:  # if loop to help user guess
             print("Too high\nGuess again")
             a += -1
             print(f"You have {a} attempts remaining")
@@ -31,7 +31,7 @@ def guess():
         elif user_number == number:
             print(f"Congratulations, you guessed the number with {a} attempts remaining")
             exit()
-        if a == 0:
+        if a == 0:  # if loop when user runs out of attempts
             print("You've run out of attempts. You lose")
 
 
