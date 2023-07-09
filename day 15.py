@@ -48,7 +48,6 @@ def use_resources():
 
 
 def make_coffee(amount):
-    resource_check()
     if resource_check() is True:
         use_resources()
         return amount
@@ -59,7 +58,7 @@ def make_coffee(amount):
 
 flavours = ['espresso', 'latte', 'cappuccino']
 resources_name = ['Water', 'Coffee', 'Milk']
-resources = [3000, 1000, 2000]
+resources = [300, 100, 200]
 money_in_machine = 0
 status = True
 while status is True:
@@ -83,4 +82,4 @@ while status is True:
         print(f"Water: {resources[0]} ml\nCoffee: {resources[1]} ml\nMilk {resources[2]} g\nMoney: {money_in_machine}$")
     elif choice == 'refill':
         resources = [300, 100, 200]
-        print(f"{resources[0]}, {resources[1]}, {resources[2]} refilled")
+        print(f"{resources_name[0]}, {resources_name[1]}, {resources_name[2]} refilled")
