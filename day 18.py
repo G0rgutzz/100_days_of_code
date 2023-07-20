@@ -49,14 +49,33 @@ def spirograph(number_of_spirals, number_of_circles, gap):
         series_of_circles(number_of_circles)
         timmy.forward(gap)
 
+def color_palette():
+    timmy.penup()
+    timmy.setx(-400)
+    timmy.sety(-300)
+    timmy.pendown()
+    for b in range(0, 30):
+        timmy.setx(-400)
+        timmy.sety(-300+20*b)
+        for a in range(0, 30):
+            timmy.pendown()
+            timmy.color(random_color())
+            timmy.begin_fill()
+            timmy.circle(5)
+            timmy.end_fill()
+            timmy.penup()
+            timmy.forward(20)
 """
 # dashed_line(10)
 # creates polygons in a given range, each with different color
 for i in range(3, 9):
     timmy.color(random_color())
     polygon(100, i)
-"""
+
 # random_move(20)
-spirograph(5, 30, 20)
+# spirograph(5, 30, 20)
 # series_of_circles(50)
+"""
+print(my_screen.canvheight, my_screen.canvwidth)
+color_palette()
 my_screen.exitonclick()  # screen that is closed by clicking on it
