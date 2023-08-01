@@ -99,7 +99,7 @@ class Scoreboard(turtle.Turtle):
         self.goto(0,0)
         self.write('Game Over', align='center', font=('Times New Roman', 20, 'normal'))
 
-
+# game settings
 snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
@@ -109,6 +109,7 @@ screen.onkey(snake.up, 'Up')
 screen.onkey(snake.down, 'Down')
 screen.onkey(snake.left, 'Left')
 screen.onkey(snake.right, "Right")
+# actual game
 game_on = True
 while game_on:
     screen.update()
@@ -119,12 +120,12 @@ while game_on:
         food.new_location()
         snake.extend()
         scoreboard.new_score()
-# detecting collision with wall
+    # detecting collision with wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
         game_on = False
         scoreboard.game_over()
 
-# detecting collision with tail
+    # detecting collision with tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
             game_on = False
