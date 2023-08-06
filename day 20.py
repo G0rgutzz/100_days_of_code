@@ -2,7 +2,7 @@ import random
 import turtle
 import time
 
-# snake game
+"""snake game"""
 # screen parameters
 screen = turtle.Screen()
 screen.setup(width=600, height=600)
@@ -40,6 +40,13 @@ class Snake:
     def extend(self):
         self.grow(self.segments[-1].position())
 
+    def reset_snake(self):
+        for part in self.segments:
+            part.color('black')
+        self.segments.clear()
+        self.snake_body()
+        self.head = self.segments[0]
+
     def up(self):
         if self.head.heading() != 270:
             self.head.setheading(90)
@@ -75,9 +82,12 @@ class Food(turtle.Turtle):
 
 # class for keeping a score
 class Scoreboard(turtle.Turtle):
-    score = 0
+
     def __init__(self):
         super().__init__()
+        self.score = 0
+        with open('snakescore.txt') as file:
+            self.high_score = int(file.read())
         self.color('white')
         self.penup()
         self.hideturtle()
@@ -90,14 +100,16 @@ class Scoreboard(turtle.Turtle):
         self.update_score()
 
     def update_score(self):
-        self.write(arg=f'score: {self.score}', align='center',
+        self.write(arg=f'score: {self.score}, High score: {self.high_score}', align='center',
                    font=('Times New Roman', 14, 'normal'))
 
-    def game_over(self):
-        self.color('white')
-        self.penup()
-        self.goto(0,0)
-        self.write('Game Over', align='center', font=('Times New Roman', 20, 'normal'))
+    def reset_score(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open('snakescore.txt', mode='w') as file:
+                file.write(str(self.high_score))
+        self.score = 0
+        self.update_score()
 
 # game settings
 snake = Snake()
@@ -121,14 +133,14 @@ while game_on:
         snake.extend()
         scoreboard.new_score()
     # detecting collision with wall
-    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_on = False
-        scoreboard.game_over()
+    if snake.head.xcor() > 280 or snake.head.xcor() < -300 or snake.head.ycor() > 280 or snake.head.ycor() < -300:
+        scoreboard.reset_score()
+        snake.reset_snake()
 
     # detecting collision with tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_on = False
-            scoreboard.game_over()
+            scoreboard.reset_score()
+            snake.reset_snake()
 
 screen.exitonclick()
